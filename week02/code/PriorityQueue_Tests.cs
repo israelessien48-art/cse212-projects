@@ -5,8 +5,8 @@ using System;
 public class PriorityQueueTests
 {
     [TestMethod]
-    // Scenario: Enqueue several items with different priorities and dequeue them all
-    // Expected Result: Items are returned in order from highest to lowest priority
+    // Scenario: Enqueue items with different priorities and dequeue
+    // Expected Result: Items returned from highest to lowest priority
     // Defect(s) Found: Original test not implemented
     public void TestPriorityQueue_1()
     {
@@ -15,15 +15,14 @@ public class PriorityQueueTests
         pq.Enqueue("Medium", 5);
         pq.Enqueue("High", 10);
 
-        // High priority first
         Assert.AreEqual("High", pq.Dequeue());
         Assert.AreEqual("Medium", pq.Dequeue());
         Assert.AreEqual("Low", pq.Dequeue());
     }
 
     [TestMethod]
-    // Scenario: Enqueue multiple items with the same priority, check FIFO order
-    // Expected Result: Items with same priority are dequeued in order they were added
+    // Scenario: Enqueue multiple items with same priority, verify FIFO
+    // Expected Result: Items dequeued in the order they were added
     // Defect(s) Found: Original test not implemented
     public void TestPriorityQueue_2()
     {
@@ -38,13 +37,12 @@ public class PriorityQueueTests
     }
 
     [TestMethod]
-    // Scenario: Enqueue items, then dequeue from empty queue
+    // Scenario: Dequeue from empty queue
     // Expected Result: InvalidOperationException with message "The queue is empty."
     // Defect(s) Found: Original test not implemented
     public void TestPriorityQueue_Empty()
     {
         var pq = new PriorityQueue();
-
         try
         {
             pq.Dequeue();
@@ -61,9 +59,8 @@ public class PriorityQueueTests
     }
 
     [TestMethod]
-    // Scenario: Mix of priorities and same-priority items
-    // Expected Result: Highest priority first, same-priority items FIFO
-    // Defect(s) Found: Original test not implemented
+    // Scenario: Mix of priorities with duplicates
+    // Expected Result: Highest priority first, same-priority FIFO
     public void TestPriorityQueue_Mixed()
     {
         var pq = new PriorityQueue();
@@ -73,8 +70,8 @@ public class PriorityQueueTests
         pq.Enqueue("D", 10);
         pq.Enqueue("E", 1);
 
-        Assert.AreEqual("B", pq.Dequeue()); // highest priority, first inserted
-        Assert.AreEqual("D", pq.Dequeue()); // same priority as B, inserted later
+        Assert.AreEqual("B", pq.Dequeue());
+        Assert.AreEqual("D", pq.Dequeue());
         Assert.AreEqual("C", pq.Dequeue());
         Assert.AreEqual("A", pq.Dequeue());
         Assert.AreEqual("E", pq.Dequeue());
